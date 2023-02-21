@@ -21,5 +21,16 @@ pub fn main() {
     canvas.clear();
     canvas.present();
 
-    loop {}
+    let mut sdl_event_pump = sdl_context
+        .event_pump()
+        .expect("Couldn't get the SDL2 event pump!");
+    loop {
+        for event in sdl_event_pump.wait_iter() {
+            match event {
+                _ => {
+                    println!("Event!");
+                }
+            }
+        }
+    }
 }
