@@ -22,6 +22,7 @@
             rust-analyzer
             openssl
             pkgconfig
+            SDL2.dev
             (rust-bin.beta.latest.default.override {
               extensions = [ "rust-src" ];
               targets = [ "x86_64-unknown-linux-gnu" "wasm32-unknown-unknown" ];
