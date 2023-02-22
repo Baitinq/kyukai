@@ -1,6 +1,7 @@
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
+use std::time::Duration;
 
 fn main() {
     let sdl_context = sdl2::init().expect("Couldn't initialize the SDL2 context!");
@@ -10,10 +11,15 @@ fn main() {
 
     ctrlc::set_handler(move || std::process::exit(1)).expect("Error setting Ctrl-C handler");
 
-    show_screensaver(sdl_context, sdl_video);
+    let show_frequency = Duration::from_secs(5);
+    loop {
+        show_screensaver(&sdl_context, &sdl_video);
+
+        ::std::thread::sleep(show_frequency);
+    }
 }
 
-fn show_screensaver(sdl_context: sdl2::Sdl, sdl_video: sdl2::VideoSubsystem) {
+fn show_screensaver(sdl_context: &sdl2::Sdl, sdl_video: &sdl2::VideoSubsystem) {
     let window = sdl_video
         .window("Kyukai", 10, 10)
         .fullscreen()
