@@ -2,12 +2,16 @@ use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
 
-pub fn main() {
+fn main() {
     let sdl_context = sdl2::init().expect("Couldn't initialize the SDL2 context!");
     let sdl_video = sdl_context
         .video()
         .expect("Couldn't get the SDL2 video subsystem!");
 
+    show_screensaver(sdl_context, sdl_video);
+}
+
+fn show_screensaver(sdl_context: sdl2::Sdl, sdl_video: sdl2::VideoSubsystem) {
     let window = sdl_video
         .window("Kyukai", 10, 10)
         .fullscreen()
