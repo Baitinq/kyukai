@@ -1,3 +1,5 @@
+use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
 
 pub fn main() {
@@ -24,12 +26,16 @@ pub fn main() {
     let mut sdl_event_pump = sdl_context
         .event_pump()
         .expect("Couldn't get the SDL2 event pump!");
-    loop {
+    'running: loop {
         for event in sdl_event_pump.wait_iter() {
             match event {
-                _ => {
-                    println!("Event!");
+                Event::KeyDown {
+                    keycode: Some(Keycode::Escape),
+                    ..
+                } => {
+                    break 'running;
                 }
+                _ => {}
             }
         }
     }
