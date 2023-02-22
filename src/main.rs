@@ -8,6 +8,8 @@ fn main() {
         .video()
         .expect("Couldn't get the SDL2 video subsystem!");
 
+    ctrlc::set_handler(move || std::process::exit(1)).expect("Error setting Ctrl-C handler");
+
     show_screensaver(sdl_context, sdl_video);
 }
 
@@ -39,6 +41,7 @@ fn show_screensaver(sdl_context: sdl2::Sdl, sdl_video: sdl2::VideoSubsystem) {
                 } => {
                     break 'running;
                 }
+                Event::Quit { timestamp: _ } => std::process::exit(0),
                 _ => {}
             }
         }
